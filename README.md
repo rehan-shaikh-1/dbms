@@ -684,7 +684,6 @@ db.employee.find({dept: {$ne: "IT"}}).pretty();
 db.employee.aggregate([ {$group: {_id: "$dept", total_salary: {$sum: "$salary"}}} ]);
 db.employee.aggregate([ {$group: {_id: "$dept", avg_salary: {$avg: "$salary"}}} ]);
 
-
 =========================================
 PROBLEM STATEMENT 13: MONGODB (STUDENT)
 =========================================
@@ -700,7 +699,6 @@ db.student.find({dept: {$ne: "IT"}}).pretty();
 db.student.aggregate([ {$group: {_id: "$dept", total_marks: {$sum: "$marks"}}} ]);
 db.student.createIndex({sname: 1});
 db.student.dropIndex("sname_1");
-
 
 =========================================
 PROBLEM STATEMENT 14: ORACLE SET OPERATIONS
@@ -722,3 +720,42 @@ SELECT cust_id FROM Account INTERSECT SELECT cust_id FROM Loan;
 
 -- 10b. MINUS: Customers with an account BUT NO loan
 SELECT cust_id FROM Account MINUS SELECT cust_id FROM Loan;
+
+Here is a condensed, quick-reference version of your Ubuntu setup and execution steps.
+
+**1. Create & Run Python Scripts (PS 8-9)**
+* **Create/Edit:** `nano mysql_connect.py` (or `mongo_connect.py`)
+* **Save & Exit:** Paste code > `Ctrl + O` > `Enter` > `Ctrl + X`
+* **Run:** `python3 mysql_connect.py`
+
+**2. MySQL Setup (PS 1-4, 7, 10-11)**
+* **Install & Start:**
+```bash
+sudo apt update && sudo apt install mysql-server
+sudo systemctl start mysql
+
+```
+* **Enter Terminal:** `sudo mysql -u root -p`
+**3. MongoDB Setup (PS 12-13)**
+* **Install & Start:**
+```bash
+sudo apt install mongodb
+sudo systemctl start mongodb
+
+```
+
+
+* **Enter Terminal:** `mongosh` (or `mongo`)
+**4. Oracle Setup via Docker (PS 5, 6, 14)**
+* **Install Docker:** `sudo apt install docker.io`
+* **Download & Run Container:**
+```bash
+sudo docker run -d -p 1521:1521 -e ORACLE_PASSWORD=oracle --name oracle_db gvenzl/oracle-xe
+
+```
+
+* **Enter Terminal:** `sudo docker exec -it oracle_db sqlplus system/oracle`
+**5. Python & Drivers Setup (PS 8-9)**
+* **Install Python & PIP:** `sudo apt install python3 python3-pip`
+* **Install DB Connectors:** `python3 -m pip install mysql-connector-python pymongo`
+
